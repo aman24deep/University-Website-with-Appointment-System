@@ -1,0 +1,72 @@
+body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#top {
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+    height: 8vh;
+
+}
+
+#bottom {
+    height: 92vh;
+    background-image: linear-gradient(95deg,
+            hsl(240deg 6% 97%) 0%,
+            hsl(271deg 8% 95%) 70%,
+            hsl(310deg 9% 93%) 84%,
+            hsl(335deg 13% 91%) 91%,
+            hsl(352deg 16% 90%) 95%,
+            hsl(6deg 18% 88%) 98%,
+            hsl(16deg 20% 86%) 100%,
+            hsl(26deg 19% 83%) 100%,
+            hsl(37deg 16% 80%) 100%,
+            hsl(55deg 11% 77%) 100%);
+}
+
+#popup-form {
+    position: fixed;
+    display: none;
+    height: 83vh;
+    width: 55vw;
+    background-color: #d8ddef;
+    left: 25%;
+    z-index: 9999;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    z-index: 1; 
+    /* Make sure the datatable is positioned relative to its wrapper */
+}
+
+input {
+    font-size: 13px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 2px solid gray;
+}
+
+.cancel-button {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    /* top: 12px; */
+    right: 10px;
+    background-color: #fff;
+    font-size: 24px;
+    width: 30px;
+    height: 38px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+

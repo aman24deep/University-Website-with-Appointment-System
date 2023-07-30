@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="../static/script.js"></script>
+    <title>RVSCET Admin</title>
+</head>
+
+<body>
+    <section>
+        <div id="top" class="container-fluid text-center p-2">
+            <h3>APPOINTMENT REQUESTS</h3>
+        </div>
+
+        <section>
+
+            <div id="popup-form" class="container">
+
+                <form id="myForm" method="put">
+                    <div class="row d-flex justify-content-center">
+                        <div class="d-flex flex-row justify-content-center m-3">
+                            <h2>Set Appointment</h2>
+                            <button class="cancel-button">&times;</button>
+                            <!-- <div class="close-button">&times;</div> -->
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="fname" type="text" name="fname" class="form-control" readonly
+                                aria-label="First name">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="lname" type="text" name="lname" class="form-control" readonly
+                                aria-label="Last name">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="email" type="text" name="email" class="form-control" readonly aria-label="email">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="phone" type="text" name="phone" class="form-control" readonly aria-label="phone">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="country" type="text" name="country" class="form-control" readonly
+                                aria-label="country">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="city" type="text" name="city" class="form-control" readonly aria-label="city">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="10th" type="text" name="10th" class="form-control" readonly aria-label="10th">
+                        </div>
+                        <div class="col-6 p-2">
+                            <input id="12th" type="text" name="12th" class="form-control" readonly aria-label="12th">
+                        </div>
+                        <div class="col-6 p-2">
+                            <label for="color">Desired Branch:</label>
+                            <input id="branch" type="text" name="branch" class="form-control" readonly
+                                aria-label="branch">
+                        </div>
+                        <div class="col-6 p-1 d-flex flex-row">
+                            <label for="date">Date of Birth:</label>
+                            <input id="dob" name="dob" type="text" class="form-control" readonly><br>
+                        </div>
+
+                        <!-- I need to make a time and date input for appointments -->
+                        <div class="col-6 p-1 d-flex flex-row">
+                            <label for="date">Select Appointment Time:</label>
+                            <input type="text" id="appoinTime" class="form-control timepicker" name="appointTime"
+                                min="09:00" max="17:00" autocomplete="off" />
+                        </div>
+                        <br>
+                        <div class="col-6 p-1 d-flex flex-row">
+                            <label for="date">Select Appointment Date:</label>
+                            <input id="appoinDate" name="appointDate" type="date" class="form-control"><br>
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-center m-4">
+                        <button id="appointBtn" class="btn btn-success btn-lg" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+
+        <div class="table">
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>10th Marks</th>
+                        <th>12th Marks</th>
+                        <th>Required Branch</th>
+                        <th>DOB</th>
+                        <th>Appointment Time</th>
+                        <th>Appointment Date</th>
+                        <th>Appoint</th>
+                        <th>Reject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be dynamically added here using DataTables -->
+                </tbody>
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <script>
+        $("#myForm").submit(function (event) {
+            // event.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serializeArray();
+            // console.log(formData)
+
+            var formDataJson = formData.reduce(function(obj, item){
+                obj[item.name] = item.value;
+                return obj
+            })
+            console.log(formDataJson)
+            // Send the AJAX PUT request
+            $.ajax({
+                type: "PUT",
+                url: "http://127.0.0.1:3000/api/update",
+                data: JSON.stringify(formDataJson),
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log(formDataJson)
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText); // log any errors
+                }
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>
